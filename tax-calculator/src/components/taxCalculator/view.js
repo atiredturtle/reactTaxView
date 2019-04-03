@@ -22,7 +22,7 @@ class TaxCalulator extends Component{
       <div>
         <TextBox sendChange={this.handleChange}></TextBox>
         inputAmount = ${inputAmount}
-        <TaxBrackets></TaxBrackets>
+        <TaxBrackets currAmount={inputAmount}></TaxBrackets>
       </div>
     );
   }

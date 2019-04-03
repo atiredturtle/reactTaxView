@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactTable from "react-table";
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 
@@ -37,6 +37,15 @@ class TaxBrackets extends Component {
     this.state = { brackets };
   }
 
+  getCurrBracket(){
+    const { currAmount } = this.props;
+    const { brackets } = this.state;
+
+    const lowerBrackets = brackets.filter(b => b.taxableIncome <= currAmount);
+    const topBracket = lowerBrackets[lowerBrackets.length - 1];
+    return topBracket.taxableIncome;
+  }
+
   render(){
     const columns = [{
       Header: 'Taxable Income',
@@ -49,9 +58,16 @@ class TaxBrackets extends Component {
       accessor: 'perDollarTax'
     }];
 
-
+    this.getCurrBracket();
     return (
       <ReactTable
+        getTrProps={(state, rowInfo, column) => {
+          return {
+            style: {
+              background: rowInfo && rowInfo.row.taxableIncome == this.getCurrBracket() ? 'green' : ''
+            }
+          };
+        }}
         data={this.state.brackets}
         columns={columns}
       ></ReactTable>
