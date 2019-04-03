@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import TextBox from './components/textBox';
 import AppWrapper from './styled';
+import TaxCalculator from './components/taxCalculator';
 
 class App extends Component {
   render() {
     return (
       <AppWrapper>
         <div className="App">
-          Test
-          <TextBox/>
+          <TaxCalculator></TaxCalculator>
         </div>
       </AppWrapper>
     );
